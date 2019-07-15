@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h4>商品URLや商品名で検索する</h4>
+<form class="px-1 py-4" method="post" action="{% url 'product:search' %}">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <input name="keyword" type="text" class="form-control form-control-lg" placeholder="ProductURL, ProductName">
+        <div class="input-group-append">
+            <button class="btn btn-lg btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+<h4>登録商品一覧</h4>
+{% for p in products %}
+<div class="card">
+    <div class="row no-gutters">
+        <div class="col-md-2">
+            <img class="product-image m-3" src="{{ p.image }}">
+        </div>
+        <div class="col-md-10">
+            <div class="card-body">
+                <p class="card-title"><a href="{{product_url}}{{p.asin}}">{{ p.title }}</a></p>
+                <p class="card-text">
+                    ASIN: {{ p.asin }}<br>
+                    登録日: {{ p.created_date }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
