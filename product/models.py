@@ -14,8 +14,8 @@ class Product(models.Model):
 
 class Price(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    price = models.IntegerField()
+    price = models.IntegerField(null=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f("{self.product.title}({created_date}): {price}")
+        return f"{self.product.asin}: {self.price}"

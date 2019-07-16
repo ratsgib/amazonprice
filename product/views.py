@@ -4,7 +4,7 @@ import logging
 import requests
 import re
 from bs4 import BeautifulSoup
-from product.models import Product
+from product.models import Product, Price
 
 logger = logging.getLogger(__name__)
 
@@ -35,8 +35,8 @@ def search(request):
                     product.title = scraped_data["title"]
                     product.image = scraped_data["image"]
                     product.save()
-                    scrape_price(soup)
                     logger.debug("New product registered.")
+                scrape_price(product, page_soup)
         return redirect("index")
     else:
         return redirect("index")
@@ -60,6 +60,7 @@ def get_product_soup(asin):
     '''
     response = requests.get(PRODUCT_URL + asin)
     if response.status_code == 404:
+        logger.debug(f"{asin} product page is 404.")
         return None
     soup = BeautifulSoup(response.text, "html.parser")
     return soup
@@ -77,8 +78,14 @@ def scrape_product(soup):
     return {'title': title, 'image': image}
 
 
-def scrape_price(soup):
+def scrape_price(product, soup):
     '''
     商品情報から価格をスクレイピングし、保存する
+    価格が取得できない場合、nullデータとして保存する
     '''
-    pass
+    html = soup.select_one(".a-size-medium.a-color-price")
+    price = None
+    if html and html.contents:
+        price = int(re.sub(r'[,￥]', "", html.contents[0].strip()))
+        logger.debug(f"{product.asin} price: {price}")
+    Price(product=product, price=price).save()

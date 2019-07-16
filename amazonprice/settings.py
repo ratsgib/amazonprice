@@ -150,7 +150,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'product.views': {
+        'product': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,
