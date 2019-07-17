@@ -1,3 +1,12 @@
 .product-image {
     height: 100px;
 }
+
+.price-graph {
+    height: 150px;
+    width: 100%;
+}
+
+.price-graph-data {
+    display: none;
+}

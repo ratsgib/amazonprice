@@ -1,7 +1,10 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var myChart = Highcharts.chart('graph-B07PLR3BTV', {
+function write_graph(asin) {
+    var myChart = Highcharts.chart("graph-" + asin, {
         title: {
             text: undefined,
+        },
+        data: {
+            csv: document.getElementById('data-' + asin).innerHTML,
         },
         xAxis: {
             title: {
@@ -16,11 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         series: [{
             name: 'Price',
-            data: [[Date.parse('2016-07-29'), 59.8],
-                [Date.parse('2016-07-30'), 60.2],
-                [Date.parse('2016-07-31'), 59.9],
-                [Date.parse('2016-08-02'), 60.8],
-                [Date.parse('2016-08-05'), 61.7]],
         }],
         credits: {
             enabled: false
@@ -29,4 +27,4 @@ document.addEventListener('DOMContentLoaded', function () {
             enabled: false
         },
     });
-});
+}
