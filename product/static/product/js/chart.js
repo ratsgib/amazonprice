@@ -4,6 +4,8 @@ function write_graph(asin) {
             text: undefined,
         },
         data: {
+            name: 'Price',
+            firstRowAsNames: false,
             csv: document.getElementById('data-' + asin).innerHTML,
         },
         xAxis: {
@@ -15,7 +17,8 @@ function write_graph(asin) {
         yAxis: {
             title: {
                 text: undefined,
-            }
+            },
+            min: 0,
         },
         series: [{
             name: 'Price',
