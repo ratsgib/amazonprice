@@ -29,5 +29,12 @@ function write_graph(asin) {
         legend: {
             enabled: false
         },
-    });
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true,
+                }
+            }
+        },
+});
 }

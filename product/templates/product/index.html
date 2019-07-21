@@ -14,38 +14,44 @@
         </div>
     </div>
 </form>
+<hr>
 
 <h4>登録商品一覧</h4>
-{% for p in products %}
-<div class="card my-1">
-    <div class="row no-gutters">
-        <div class="col-md-2">
-            <img class="product-image m-3" src="{{ p.image }}">
-        </div>
-        <div class="col-md-7">
-            <div class="card-body">
-                <p class="card-title">
-                    <a href="{{ product_url }}{{ p.asin }}" target="_blank">{{ p.title }}</a>
-                </p>
-                <p class="card-text">
-                    ASIN: {{ p.asin }}<br>
-                    登録日: {{ p.created_date }}
-                </p>
-                <a href="{% url 'product:delete' p.asin %}" onclick="return confirm('削除しますか？')" class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash"></i> Delete
-                </a>
+<div id="result_container" class="container-fluid my-4">
+    {% if not products %}
+    <span id="result_empty">商品の登録がありません。</span>
+    {% endif %}
+    {% for p in products %}
+    <div class="card my-1">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <img class="product-image m-3" src="{{ p.image }}">
             </div>
-        </div>
-        <div class="col-md-3">
-            <div id="graph-{{ p.asin }}" class="price-graph"></div>
-            <div id="data-{{ p.asin }}" class="price-graph-data">
+            <div class="col-md-7">
+                <div class="card-body">
+                    <p class="card-title">
+                        <a href="{{ product_url }}{{ p.asin }}" target="_blank">{{ p.title }}</a>
+                    </p>
+                    <p class="card-text">
+                        ASIN: {{ p.asin }}<br>
+                        登録日: {{ p.created_date }}
+                    </p>
+                    <a href="{% url 'product:delete' p.asin %}" onclick="return confirm('削除しますか？')" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i> Delete
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div id="graph-{{ p.asin }}" class="price-graph"></div>
+                <div id="data-{{ p.asin }}" class="price-graph-data">
 {% for price in p.prices.all %}"{{ price.created_date|date:"Y/m/d H:i" }}", {{ price.price | default:"0" }}
 {% endfor %}
+                </div>
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}
 
 {% block libs %}

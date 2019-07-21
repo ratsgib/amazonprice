@@ -13,7 +13,8 @@ class Product(models.Model):
 
 
 class Price(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="prices")
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="prices")
     price = models.IntegerField(null=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
