@@ -6,7 +6,7 @@ from product.models import Product, Price
 
 def create_data(product_nums, price_nums):
     '''
-    テストデータをnums件登録する
+    テストデータをnums件登録する。
     '''
     for num in range(product_nums):
         p = Product.objects.create(

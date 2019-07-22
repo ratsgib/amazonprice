@@ -2,9 +2,12 @@ from django.db import models
 
 
 class Product(models.Model):
+    '''
+    商品モデル。
+    '''
     title = models.CharField(max_length=255)
-    asin = models.CharField(max_length=10, unique=True)
-    image = models.CharField(max_length=255, null=True)
+    asin = models.CharField(max_length=10, unique=True) # ASIN or ISBN
+    image = models.CharField(max_length=255, null=True) # product image url
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -13,6 +16,10 @@ class Product(models.Model):
 
 
 class Price(models.Model):
+    '''
+    商品の価格モデル。
+    scrape_priceバッチを起動する度に作成され、更新は考慮していない。
+    '''
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="prices")
     price = models.IntegerField(null=True)

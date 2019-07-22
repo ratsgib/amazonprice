@@ -1,5 +1,17 @@
-# amazon.co.jp price tracker
+# amazon.co.jp Price Tracker
 
 #### Install
-1. pip install -r 'pip_reqs.txt'
-1. ./manage.py migrate
+```
+pip install -r 'pip_reqs.txt'
+./manage.py migrate
+```
+
+#### Price scraping batch
+```
+manage.py scrape_price
+```
+
+#### Todo
+* More tests
+* More price patterns
+* Search and select

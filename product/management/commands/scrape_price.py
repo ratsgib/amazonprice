@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     def handle(self, *args, **options):
         '''
-        全ての商品の価格を取得する
+        Productが持つ全ての商品の価格を取得する
         '''
         logger.info("Price scraping started.")
         for p in Product.objects.all():
