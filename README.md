@@ -7,11 +7,11 @@ pip install -r 'pip_reqs.txt'
 ```
 
 #### How to use
-1. Run the django server and access the root URL.
+Run the django server and access the root URL.
 ```
 https://[your server]/
 ```
-1. Input a keyword of your favorite products.
+And input a keyword of your favorite products.
 
 #### Price scraping batch
 ```
